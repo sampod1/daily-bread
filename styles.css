@@ -1,0 +1,454 @@
+/* Daily Bread
+   The page is a walnut supper table after the lights come down.
+   The four graphics are laid on it like plates; the film is the main course.
+   Colors are lifted from the graphics themselves. */
+
+:root {
+  --walnut: #1c130e;      /* table, page ground */
+  --walnut-lit: #2c1d14;  /* table under the lamp */
+  --char: #120c09;        /* the dark room around the film */
+  --paper: #f4ede2;       /* the graphics' paper */
+  --taupe: #b9a995;       /* quiet text on walnut */
+  --mustard: #d9a03a;     /* the graphics' gold */
+  --brick: #a8412b;       /* the graphics' red */
+
+  --display: "Gloock", "Georgia", "Times New Roman", serif;
+  --text: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
+
+  --gutter: clamp(1.1rem, 4vw, 4rem);
+  --measure: 34rem;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 1.5rem;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  color: var(--paper);
+  font: 400 1.0625rem/1.6 var(--text);
+  background-color: var(--walnut);
+  /* lamp glow, then long wood grain running the length of the table */
+  background-image:
+    radial-gradient(120vw 70vh at 50% -10vh, rgba(217, 160, 58, .16), transparent 70%),
+    repeating-linear-gradient(91deg,
+      rgba(255, 220, 170, .022) 0 2px,
+      transparent 2px 11px,
+      rgba(0, 0, 0, .05) 11px 12px,
+      transparent 12px 37px);
+  overflow-x: hidden;
+}
+
+/* fine grain over everything, so the dark never goes flat */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  pointer-events: none;
+  opacity: .11;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+img, video { display: block; max-width: 100%; height: auto; }
+a { color: inherit; }
+
+:focus-visible {
+  outline: 3px solid var(--mustard);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+.skip {
+  position: absolute;
+  left: var(--gutter);
+  top: -4rem;
+  z-index: 100;
+  padding: .6rem 1rem;
+  background: var(--mustard);
+  color: var(--char);
+  font-weight: 600;
+  text-decoration: none;
+}
+.skip:focus { top: .75rem; }
+
+/* ---------- masthead ---------- */
+
+.masthead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.1rem var(--gutter) .9rem;
+}
+
+.masthead__mark,
+.colophon__mark {
+  font: 400 1.05rem/1 var(--display);
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.masthead__mark span,
+.colophon__mark span { color: var(--mustard); }
+
+.masthead nav { display: flex; gap: clamp(1rem, 3vw, 2.25rem); }
+.masthead nav a {
+  font-size: .95rem;
+  color: var(--taupe);
+  text-decoration: none;
+  padding: .35rem 0;
+  border-bottom: 1px solid transparent;
+  transition: color .2s, border-color .2s;
+}
+.masthead nav a:hover { color: var(--paper); border-color: var(--mustard); }
+
+/* ---------- hero ---------- */
+
+.hero {
+  min-height: min(86svh, 56rem);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding: clamp(1.5rem, 5vh, 4rem) var(--gutter) clamp(2.5rem, 7vh, 5rem);
+}
+
+.hero__verse {
+  margin: 0;
+  max-width: 24rem;
+  font: italic 400 1rem/1.5 var(--text);
+  color: var(--taupe);
+}
+.hero__verse cite { font-style: normal; white-space: nowrap; margin-left: .35em; }
+
+.hero__title {
+  align-self: center;
+  margin: 0;
+  font: 400 clamp(4.6rem, 21.5vw, 22rem)/.8 var(--display);
+  letter-spacing: -.035em;
+}
+.hero__word { display: block; }
+.hero__word--bread {
+  color: var(--mustard);
+  text-align: right;
+  /* the gold word sits lower and right, like the second line of a grace */
+  margin-top: .04em;
+}
+
+.hero__foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1.75rem 3rem;
+  margin-top: clamp(1.5rem, 4vh, 3rem);
+}
+
+.hero__lede {
+  margin: 0;
+  max-width: var(--measure);
+  font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+  line-height: 1.5;
+}
+
+.hero__cue {
+  display: inline-flex;
+  align-items: center;
+  gap: .7rem;
+  padding: .85rem 1.3rem .85rem 1rem;
+  border: 1px solid rgba(244, 237, 226, .35);
+  border-radius: 999px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background .2s, color .2s, border-color .2s;
+}
+.hero__cue svg { width: 1.1rem; height: 1.1rem; fill: var(--mustard); transition: fill .2s; }
+.hero__cue:hover { background: var(--mustard); border-color: var(--mustard); color: var(--char); }
+.hero__cue:hover svg { fill: var(--char); }
+.hero__time { font-weight: 400; opacity: .7; }
+
+/* one orchestrated arrival: verse, the two words, then the foot */
+@media (prefers-reduced-motion: no-preference) {
+  .hero__verse, .hero__word, .hero__foot {
+    animation: arrive 1s cubic-bezier(.2, .7, .1, 1) both;
+  }
+  .hero__word { animation-name: rise; animation-duration: 1.1s; }
+  .hero__verse { animation-delay: .1s; }
+  .hero__word:nth-child(1) { animation-delay: .25s; }
+  .hero__word:nth-child(2) { animation-delay: .42s; }
+  .hero__foot { animation-delay: .85s; }
+}
+@keyframes arrive { from { opacity: 0; } }
+@keyframes rise {
+  from { opacity: 0; transform: translateY(.18em); clip-path: inset(0 0 100% 0); }
+  to   { opacity: 1; transform: none; clip-path: inset(-.2em -.1em -.3em -.1em); }
+}
+
+/* ---------- the four graphics ---------- */
+
+.courses {
+  display: grid;
+  gap: clamp(5rem, 13vw, 11rem);
+  padding: clamp(1rem, 4vw, 3rem) var(--gutter) clamp(5rem, 12vw, 10rem);
+}
+
+.course {
+  width: min(100%, 82.5rem);
+  margin-inline: auto;
+}
+
+.course__head {
+  display: grid;
+  grid-template-columns: auto minmax(0, var(--measure));
+  align-items: end;
+  justify-content: start;
+  gap: clamp(1rem, 2.5vw, 2rem);
+  margin-bottom: clamp(1.25rem, 2.5vw, 2rem);
+}
+.course--right .course__head { justify-content: end; }
+
+.course__num {
+  font: 400 clamp(4rem, 9vw, 8rem)/.72 var(--display);
+  color: var(--mustard);
+  /* trim the numeral's descender space so it sits on the note's last line */
+  padding-bottom: .06em;
+}
+
+.course__note {
+  margin: 0;
+  font-size: clamp(1.05rem, 1.35vw, 1.2rem);
+  line-height: 1.5;
+  color: var(--paper);
+  text-wrap: pretty;
+}
+
+.plate { margin: 0; }
+
+.plate__open {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: var(--paper);
+  cursor: zoom-in;
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, .08),
+    0 2px 4px rgba(0, 0, 0, .35),
+    0 30px 60px -18px rgba(0, 0, 0, .75),
+    0 60px 120px -30px rgba(0, 0, 0, .55);
+  transition: transform .35s cubic-bezier(.2, .7, .1, 1), box-shadow .35s;
+}
+.plate__open img { width: 100%; }
+.plate__open:hover { transform: translateY(-4px); }
+
+/* each plate is set down slightly askew and squares up as it reaches you */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .plate {
+      animation: set-down linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 38%;
+    }
+    .course--left .plate  { --tilt: -2.2deg; --slide: -3vw; }
+    .course--right .plate { --tilt: 2.2deg;  --slide: 3vw; }
+  }
+}
+@keyframes set-down {
+  from { transform: translateX(var(--slide, 0)) rotate(var(--tilt, 0deg)) scale(.94); }
+  to   { transform: none; }
+}
+
+.courses__hint {
+  margin: calc(clamp(5rem, 13vw, 11rem) * -0.6) auto 0;
+  color: var(--taupe);
+  font-size: .95rem;
+  text-align: center;
+}
+
+/* ---------- the film ---------- */
+
+.film {
+  position: relative;
+  padding: clamp(5rem, 12vw, 10rem) var(--gutter) clamp(5rem, 12vw, 9rem);
+  background:
+    radial-gradient(90vw 60rem at 50% 62%, rgba(217, 160, 58, .13), transparent 62%),
+    linear-gradient(var(--walnut) 0, var(--char) 16rem);
+  background-color: var(--char);
+}
+/* scalloped table edge: where the table ends and the screening room begins */
+.film::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(217, 160, 58, .55) 20%, rgba(217, 160, 58, .55) 80%, transparent);
+}
+
+.film__intro {
+  width: min(100%, 72rem);
+  margin: 0 auto clamp(2rem, 5vw, 3.5rem);
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  align-items: end;
+  gap: 1.5rem clamp(2rem, 6vw, 5rem);
+}
+
+.film__title {
+  margin: 0;
+  font: 400 clamp(2.6rem, 7vw, 6rem)/.98 var(--display);
+  letter-spacing: -.02em;
+  text-wrap: balance;
+}
+
+.film__note {
+  margin: 0;
+  max-width: var(--measure);
+  color: var(--taupe);
+  font-size: clamp(1.05rem, 1.35vw, 1.2rem);
+  line-height: 1.5;
+}
+
+.screen {
+  position: relative;
+  width: min(100%, 72rem);
+  margin-inline: auto;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 1px rgba(217, 160, 58, .28),
+    0 40px 90px -20px rgba(0, 0, 0, .9),
+    0 0 140px -10px rgba(217, 160, 58, .22);
+}
+.screen video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #000;
+}
+
+.screen__play {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 1rem;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  color: var(--paper);
+  font: 600 1.05rem/1 var(--text);
+  background: radial-gradient(closest-side, rgba(18, 12, 9, .55), rgba(18, 12, 9, .25) 70%, rgba(18, 12, 9, .45));
+  transition: background .25s;
+}
+.screen__play svg {
+  width: clamp(4.5rem, 9vw, 7rem);
+  height: clamp(4.5rem, 9vw, 7rem);
+  padding: 26%;
+  padding-left: 30%;
+  border-radius: 50%;
+  background: var(--mustard);
+  fill: var(--char);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, .5);
+  transition: transform .25s cubic-bezier(.2, .7, .1, 1);
+}
+.screen__play:hover svg { transform: scale(1.08); }
+.screen__play:focus-visible { outline-offset: -8px; }
+.screen__play[hidden] { display: none; }
+
+.screen__error {
+  width: min(100%, 72rem);
+  margin: 1.25rem auto 0;
+  padding: 1rem 1.25rem;
+  border-left: 3px solid var(--brick);
+  background: rgba(168, 65, 43, .14);
+}
+.screen__error code { font-size: .9em; }
+
+/* ---------- colophon ---------- */
+
+.colophon {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem 3rem;
+  padding: 2.5rem var(--gutter) 3rem;
+  background: var(--char);
+  border-top: 1px solid rgba(244, 237, 226, .12);
+  color: var(--taupe);
+  font-size: .95rem;
+}
+.colophon p { margin: 0; max-width: 38rem; }
+.colophon__mark { color: var(--paper); }
+
+/* ---------- full-size viewer ---------- */
+
+.viewer {
+  width: 100vw;
+  height: 100dvh;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: rgba(12, 8, 6, .96);
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+.viewer::backdrop { background: rgba(12, 8, 6, .9); }
+.viewer[open] { display: grid; }
+.viewer img {
+  margin: auto;
+  padding: clamp(3.75rem, 6vh, 5rem) clamp(.75rem, 3vw, 3rem) clamp(.75rem, 3vw, 3rem);
+  max-height: 100dvh;
+  width: auto;
+  object-fit: contain;
+  cursor: zoom-out;
+}
+.viewer__close {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 2;
+  padding: .6rem 1.1rem;
+  border: 1px solid rgba(244, 237, 226, .4);
+  border-radius: 999px;
+  background: var(--char);
+  color: var(--paper);
+  font: 600 .95rem/1 var(--text);
+  cursor: pointer;
+}
+.viewer__close:hover { background: var(--mustard); border-color: var(--mustard); color: var(--char); }
+
+/* ---------- small screens ---------- */
+
+@media (max-width: 760px) {
+  .hero { min-height: 0; row-gap: 2.5rem; }
+  .hero__title { font-size: clamp(4.4rem, 27vw, 11rem); }
+  .hero__word--bread { text-align: left; }
+
+  .course__head,
+  .course--right .course__head { grid-template-columns: auto 1fr; justify-content: start; }
+
+  /* run the graphics nearly edge to edge so their type stays readable */
+  .plate { margin-inline: calc(var(--gutter) * -0.55); }
+
+  .film__intro { grid-template-columns: 1fr; }
+
+  /* on a phone the full-size view scrolls sideways instead of shrinking */
+  .viewer img {
+    max-width: none;
+    max-height: none;
+    width: 230vw;
+    padding: 4rem .75rem .75rem;
+  }
+}
