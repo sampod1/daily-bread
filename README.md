@@ -23,6 +23,7 @@ Then open http://localhost:4173.
 | `assets/graphic-1.jpg`, `assets/graphic-4.jpg` | E3 graphics 1 and 4 at 2560 px wide, plus 1280 px versions for small screens. File numbers match the E3 originals. |
 | `assets/chef-alan-interview.mp4` | The film, re-encoded from the 4K master to 1080p H.264 at about 4.7 Mbps (80 MB). |
 | `assets/poster.jpg` | The frame shown before the film plays. |
+| `assets/sam.jpg` | Bio photo: square 800 px crop of `IMG_8657.jpeg`, metadata removed. |
 | `tools/encode.swift` | The script that made the web encode of the film. |
 | `tools/serve.py` | A small local server that supports video seeking. |
 
