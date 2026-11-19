@@ -1,8 +1,8 @@
 # Daily Bread
 
 A one-page site for Sam Podgoreanu's MEJO 121 project on Chef Alan Wren, the chef at
-UNC's Beta Upsilon Chi house. It presents the four E3 infographics in order, then
-scrolls down to the interview film, which plays on the page.
+UNC's Beta Upsilon Chi house. It presents two of the E3 infographics (the timeline and the
+BYX house), then scrolls down to the interview film, which plays on the page.
 
 ## View it
 
@@ -20,7 +20,7 @@ Then open http://localhost:4173.
 | Path | What it is |
 | --- | --- |
 | `index.html`, `styles.css`, `script.js` | The site. No build step, no dependencies. |
-| `assets/graphic-1…4.jpg` | The four infographics at 2560 px wide, plus 1280 px versions for small screens. |
+| `assets/graphic-1.jpg`, `assets/graphic-4.jpg` | E3 graphics 1 and 4 at 2560 px wide, plus 1280 px versions for small screens. File numbers match the E3 originals. |
 | `assets/chef-alan-interview.mp4` | The film, re-encoded from the 4K master to 1080p H.264 at about 4.7 Mbps (80 MB). |
 | `assets/poster.jpg` | The frame shown before the film plays. |
 | `tools/encode.swift` | The script that made the web encode of the film. |
